@@ -3,6 +3,10 @@ FROM centos:latest
 # Apply updates
 RUN yum -y update
 
+# Add the EPEL repo, for NodeJS (and probably others)
+# See: https://fedoraproject.org/wiki/EPEL
+RUN yum install -y epel-release
+
 # Install St*** run deps
 RUN yum install -y \
   nodejs-0.10.36   \
