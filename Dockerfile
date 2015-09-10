@@ -1,16 +1,21 @@
-FROM centos:6.6
+FROM centos:latest
 
-# Apply security updates
+# Apply updates
 RUN yum -y update
 
-# Install St*** build deps
-RUN yum -y groupinstall "Development Tools"
-RUN yum -y install python-devel mysql-devel tar
+# Install St*** run deps
+RUN yum install -y \
+  nodejs-0.10.36   \
+  python-2.7.5     \
+  python-pip-7.1.0 \
+  s3cmd-1.5.1.2
 
-# Install Python tools
-RUN curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python
-RUN pip install --upgrade pip
-RUN pip install virtualenv
+# Install St*** build deps
+RUN yum install -y     \
+  maven-3.0.5          \
+  gcc-4.8.3            \
+  python-devel-2.7.5   \
+  mariadb-devel-5.5.44
 
 # Clean up
 RUN yum clean all
